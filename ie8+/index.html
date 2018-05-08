@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>单屏（全屏）适配解决方案 IE8+</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		html,body{width: 100%;height: 100%;}
+		.page{position: absolute;top: 0;left: 0;right: 0;bottom: 0;background-color: #000;overflow: hidden;}
+		.page__inner,.page__bg{position: absolute;width: 375px;height: 603px;top: 50%;left: 50%;margin: -301.5px 0 0 -187.5px;background-color: #fff;}
+		.page__bg{background-color: blue;}
+		.box{position: absolute;width: 100px;height: 100px;left: 0;bottom: 0;background-color: red;z-index: 1;top: 50%;left: 50%;margin: -50px 0 0 -50px;}
+		/* 样式实现居中 */
+		.contain-wp,.cover-wp{position: absolute;width: 0;height: 0;top: 50%;left: 50%;}
+	</style>
+</head>
+<body>
+	
+	<div class="page">
+		<!-- 可以裁切的背景层 cover-->
+		<div class="cover-wp">
+			<div class="page__bg"></div>
+		</div>
+		<!-- 需要完整展示的主内容 contain-->
+		<div class="contain-wp">
+			<div class="page__inner"></div>
+		</div>
+		<!-- 其他元素 -->
+		<div class="contain-wp">
+			<div class="box"></div>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="scaleEle.js"></script>
+	<script>
+		$(function(){
+			$.scaleEle({
+				select: '.contain-wp',
+				width: 375,
+				height: 603,
+				mode: 'contain',
+				position: 'center'
+			});
+
+			$.scaleEle({
+				select: '.cover-wp',
+				width: 375,
+				height: 603,
+				mode: 'cover',
+				position: 'center'
+			});
+		})
+	</script>
+</body>
+</html>
